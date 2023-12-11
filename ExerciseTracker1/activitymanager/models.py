@@ -22,7 +22,7 @@ class Exercise(models.Model):
     exercise_distance = models.IntegerField()
     exercise_description = models.CharField(max_length=1000)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    exercise_date = models.DateField
+    exercise_date = models.DateField()
     exercise_time = models.IntegerField()
     def __str__(self):
         return self.exercise_name

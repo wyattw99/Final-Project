@@ -6,7 +6,7 @@ Created on Sun Dec 10 16:07:44 2023
 """
 
 
-'''from django import forms
+from django import forms
 from .models import User, Exercise
 
 class EditUserForm(forms.ModelForm):
@@ -17,5 +17,5 @@ class EditUserForm(forms.ModelForm):
 class EditExerciseForm(forms.ModelForm):
     class Meta:
         model = Exercise
-        fields = ['exercise_name', 'exercise_type', 'exercise_distance', 'exercise_description', 'user', 'exercise_date', 'exercise_time']'''
+        fields = ['exercise_name', 'exercise_type', 'exercise_distance', 'exercise_description', 'user', 'exercise_date', 'exercise_time']
         

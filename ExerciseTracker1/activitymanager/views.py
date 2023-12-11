@@ -1,9 +1,9 @@
 
 # Create your views here.
 from django.http import HttpResponse
-'''from .models import User, Exercise
+from .models import User, Exercise
 from django.shortcuts import render,get_object_or_404,redirect
-from .forms import EditUserForm, EditExerciseForm'''
+from .forms import EditUserForm, EditExerciseForm
 
 
 
@@ -12,7 +12,7 @@ def home(request):
     return HttpResponse("Activity Manager Home")
     '''will make homepage with links to different pages'''
 
-'''def user_detail(request, user_id):
+def user_detail(request, user_id):
     user = get_object_or_404(User,user_id=user_id)
     return render(request, 'activitymanager/user_detail.html',{'user': user})
 
@@ -69,5 +69,5 @@ def edit_exercise(request,exercise_id):
             return redirect('/activitymanager/{}/exercise/'.format(exercise_id))
     else:
         form = EditExerciseForm()
-    return render(request,'activitymanager/edit_exercise.html',{'form':form})'''
+    return render(request,'activitymanager/edit_exercise.html',{'form':form})
     
