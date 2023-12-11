@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+</head>
+<body>
+    <h1>User Details</h1>
+    <p>User Name: {{ user.user_name }}</p>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    <p>Birthday: {{ user.user_birthday }}</p>
+    <p>Height: {{ user.user_height }}</p>
+    <p>Weight: {{ user.user_weight }}</p>
+    
+     <a href="{% url  'activitymanager:edit_user' user.user_id %}"><button>Edit User</button></a>
+   
+</body>
+</html>

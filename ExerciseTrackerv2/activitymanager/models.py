@@ -26,4 +26,3 @@ class Exercise(models.Model):
     exercise_time = models.IntegerField()
     def __str__(self):
         return self.exercise_name
-    

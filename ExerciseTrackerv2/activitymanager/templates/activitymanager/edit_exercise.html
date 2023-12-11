@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Exercise</title>
+</head>
+<body>
+    <form method="post">
+        <h1>New Exercise</h1>
+        {% csrf_token %}
+        <label for="exercise_name">Exercise Name:</label>
+        <input type="text" id="exercise_name" name="exercise_name" required><br>
+        
+        <label for="exercise_type">Type:</label>
+        <input Type="text" id="exercise_type" name="exercise_type" required><br>
+
+        <label for="exercise_distance">Exercise Distance:</label>
+        <input type="text" id="exercise_distance" name="exercise_distance" required><br>
+
+        <label for="exercise_description">Exercise Description:</label>
+        <input type="text" id="exercise_description" name="exercise_description" required><br>     
+        
+        <label for="user">User:</label>
+        <input type="number" id="user" name="user" required><br>
+
+        <label for="exercise_date">Exercise Date:</label>
+        <input type="date" id="exercise_date" name="exercise_date" required><br>
+
+        <label for="exercise_time">Weight:</label>
+        <input type="number" id="exercise_time" name="exercise_time" required><br>
+
+        <button type="submit">Create Exercise</button>
+    </form>
+</body>
+</html>
