@@ -1,9 +1,11 @@
 
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import User, Exercise
 from django.shortcuts import render,get_object_or_404,redirect
 from .forms import EditUserForm, EditExerciseForm
+from .serializers import UserSerializer, ExerciseSerializer
+from rest_framework import viewsets
 
 
 
@@ -70,4 +72,13 @@ def edit_exercise(request,exercise_id):
     else:
         form = EditExerciseForm()
     return render(request,'activitymanager/edit_exercise.html',{'form':form})
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    
+class ExerciseViewSet(viewsets.ModelViewSet):
+    queryset = Exercise.objects.all()
+    serializer_class = ExerciseSerializer
+
     
