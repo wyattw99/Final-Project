@@ -20,6 +20,7 @@
     <p>Weight: {{ user.user_weight }}</p>
     
      <a href="{% url  'activitymanager:edit_user' user.user_id %}"><button>Edit User</button></a>
-   
+     <a href="{% url  'activitymanager:delete_user' user.user_id %}"><button>Delete User</button</a>
+     
 </body>
 </html>

@@ -19,9 +19,13 @@
     <p>Exercise Description: {{ exercise.exercise_description }}</p>
     <p>User: {{ exercise.user }}</p>
     <p>Exercise Date: {{ exercise.exercise_date }}</p>
-    <p>Exercise Time: {{ exercose.exercise_time}}</p>
-    
-     <a href="{% url  'activitymanager:edit_exercise' user.user_id exercise.exercise_id %}"><button>Edit Exercise</button></a>
-   
+    <p>Exercise Time: {{ exercise.exercise_time}}</p>
+    <p>Calories Burned: {{ exercise.calories_burned }}</p>
+    {% if user.user_id == exercise.user.user_id %}
+         <a href="{% url  'activitymanager:edit_exercise' user.user_id exercise.exercise_id %}"><button>Edit Exercise</button></a>
+         <a href="{% url  'activitymanager:delete_exercise' user.user_id exercise.exercise_id %}"><button>Delete Exercise</button</a>
+    {% else %}
+        <p>Activity created by another user<p>
+    {% endif %}
 </body>
 </html>

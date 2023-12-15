@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete</title>
+</head>
+<body>
+    <form method="POST">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+        Are you want to delete this account?
+        <input type="submit" value="Yes" />
+        <a href="{% url 'activitymanager:user_detail' user.user_id  %}">Cancel</a>
+    </form>
+</body>
+</html>

@@ -18,8 +18,13 @@
         <label for="exercise_name">Exercise Name:</label>
         <input type="text" id="exercise_name" name="exercise_name" required><br>
         
-        <label for="exercise_type">Type:</label>
-        <input Type="text" id="exercise_type" name="exercise_type" required><br>
+       <label for="exercise_type">Type:</label>
+        <select id="exercise_type" name="exercise_type" required>
+            <option value="Run">Run</option>
+            <option value="Bike">Bike</option>
+            <option value="Swim">Swim</option>
+            <option value="Other">Other</option>
+        </select><br>
 
         <label for="exercise_distance">Exercise Distance:</label>
         <input type="text" id="exercise_distance" name="exercise_distance" required><br>
@@ -35,6 +40,13 @@
 
         <label for="exercise_time">Time:</label>
         <input type="number" id="exercise_time" name="exercise_time" required><br>
+        
+        <label for="exercise_intensity">Type:</label>
+         <select id="exercise_intensity" name="exercise_intensity" required>
+             <option value="Easy">Easy</option>
+             <option value="Medium">Medium</option>
+             <option value="Hard">Hard</option>
+         </select><br>
 
         <button type="submit">Create Exercise</button>
     </form>

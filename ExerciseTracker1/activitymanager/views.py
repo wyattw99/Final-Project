@@ -3,7 +3,7 @@
 from django.http import HttpResponse, JsonResponse
 from .models import User, Exercise
 from django.shortcuts import render,get_object_or_404,redirect
-from .forms import EditUserForm, EditExerciseForm, LoginForm
+from .forms import EditUserForm, EditExerciseForm, LoginForm, NewUserForm
 from .serializers import UserSerializer, ExerciseSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
@@ -55,14 +55,14 @@ def web_all_users(request):
 
 def web_new_user(request):
     if request.method =='POST':
-        form = EditUserForm(request.POST)
+        form = NewUserForm(request.POST)
         if form.is_valid():
             newuser = form.save()
             userId = newuser.user_id
         return redirect('/activitymanager/{}/user/'.format(userId))
     
     else:
-        form = EditUserForm()
+        form = NewUserForm()
     return render(request, 'activitymanager/create_user.html',{'form':form})
 
 def web_edit_user(request,user_id):
@@ -114,6 +114,22 @@ def web_all_user_exercises(request, user_id):
     exercises = Exercise.objects.filter(user = user_id)
     context = {"exercises":exercises, "user":user}
     return render(request, 'activitymanager/your_exercises.html', context)
+
+def web_delete_exercise(request, exercise_id, user_id):
+    user = User.objects.get(user_id = user_id)
+    exercise_to_be_deleted = get_object_or_404(Exercise, exercise_id = exercise_id)
+    context = {'user':user, 'exercise':exercise_to_be_deleted}
+    if request.method == "POST":
+        exercise_to_be_deleted.delete()
+        return redirect("/activitymanager/{}/home/".format(user.user_id))
+    return render(request,"activitymanager/exercise_delete_confirmation.html",context)
+
+def web_delete_user(request, user_id):
+    user_to_be_deleted = get_object_or_404(User, user_id = user_id)
+    if request.method == "POST":
+        user_to_be_deleted.delete()
+        return redirect("/activitymanager/")
+    return render(request, "activitymanager/user_delete_confirmation.html",{'user':user_to_be_deleted})
 
 @csrf_exempt
 def api_user_list(request):      

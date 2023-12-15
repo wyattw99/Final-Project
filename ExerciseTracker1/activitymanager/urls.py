@@ -32,6 +32,10 @@ urlpatterns = [
     path("<int:user_id>/<int:exercise_id>/editexercise/",views.web_edit_exercise,name="edit_exercise"),
     #all exercises by a user
     path("<int:user_id>/allexercises/",views.web_all_user_exercises, name="all_exercises"),
+    #delete exercise
+    path("<int:user_id>/<int:exercise_id>/deleteexercise/",views.web_delete_exercise, name = "delete_exercise"),
+    #delete user
+    path("<int:user_id>/deleteuser/",views.web_delete_user, name = "delete_user"),
     #api call for all users
     path("users/",views.api_user_list),
     #api call for a specific user
