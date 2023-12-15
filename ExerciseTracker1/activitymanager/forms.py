@@ -19,3 +19,8 @@ class EditExerciseForm(forms.ModelForm):
         model = Exercise
         fields = ['exercise_name', 'exercise_type', 'exercise_distance', 'exercise_description', 'user', 'exercise_date', 'exercise_time']
         
+class LoginForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['user_name', 'user_password']
+        

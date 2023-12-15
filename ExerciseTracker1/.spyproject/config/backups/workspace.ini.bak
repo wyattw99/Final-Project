@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['activitymanager\\forms.py', 'activitymanager\\views.py', 'activitymanager\\models.py', 'ExerciseTracker1\\urls.py', 'ExerciseTracker1\\settings.py', 'activitymanager\\serializers.py', 'activitymanager\\urls.py', 'activitymanager\\templates\\activitymanager\\edit_user.html']
+recent_files = ['activitymanager\\forms.py', 'activitymanager\\views.py', 'activitymanager\\models.py', 'ExerciseTracker1\\settings.py', 'activitymanager\\serializers.py', 'activitymanager\\urls.py', 'activitymanager\\templates\\activitymanager\\home.html', 'activitymanager\\templates\\activitymanager\\login.html', 'activitymanager\\templates\\activitymanager\\create_user.html']
 
 [main]
 version = 0.2.0

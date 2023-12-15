@@ -4,8 +4,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercise Details</title>
 </head>
+
 <body>
-    <h1>User Details</h1>
+    <h1>Menu</h1>
+    <a href="{% url 'activitymanager:new_exercise' user_id=user.user_id %}"><button>New Exercise</button></a>
+    <a href="{% url 'activitymanager:all_exercises' user.user_id %}"><button>Your Exercises</button></a>
+    <a href="{% url  'activitymanager:user_detail' user.user_id%}"><button>Account Details</button></a>
+    <a href="{% url 'activitymanager:login' %}"><button>Logout</button></a>
+    <a href="{% url 'activitymanager:home' user_id=user.user_id %}"><button>Home</button></a>
+    <h1>Exercise Details</h1>
     <p>Exercise Name: {{ exercise.exercise_name }}</p>
     <p>Exercise Type: {{ exercise.exercise_type }}</p>
     <p>Exercise Distance: {{ exercise.exercise_distance }}</p>
@@ -14,7 +21,7 @@
     <p>Exercise Date: {{ exercise.exercise_date }}</p>
     <p>Exercise Time: {{ exercose.exercise_time}}</p>
     
-     <a href="{% url  'activitymanager:edit_exercise' exercise.exercise_id %}"><button>Edit Exercise</button></a>
+     <a href="{% url  'activitymanager:edit_exercise' user.user_id exercise.exercise_id %}"><button>Edit Exercise</button></a>
    
 </body>
 </html>

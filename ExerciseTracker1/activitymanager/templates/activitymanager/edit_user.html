@@ -6,6 +6,12 @@
     <title>Edit User</title>
 </head>
 <body>
+    <h1>Menu</h1>
+    <a href="{% url 'activitymanager:new_exercise' user_id=user.user_id %}"><button>New Exercise</button></a>
+    <a href="{% url 'activitymanager:all_exercises' user.user_id %}"><button>Your Exercises</button></a>
+    <a href="{% url  'activitymanager:user_detail' user.user_id%}"><button>Account Details</button></a>
+    <a href="{% url 'activitymanager:login' %}"><button>Logout</button></a>
+    <a href="{% url 'activitymanager:home' user_id=user.user_id %}"><button>Home</button></a>
     <form method="post">
         <h1>Edit User</h1>
         {% csrf_token %}

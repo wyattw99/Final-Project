@@ -3,16 +3,45 @@
 from django.http import HttpResponse, JsonResponse
 from .models import User, Exercise
 from django.shortcuts import render,get_object_or_404,redirect
-from .forms import EditUserForm, EditExerciseForm
+from .forms import EditUserForm, EditExerciseForm, LoginForm
 from .serializers import UserSerializer, ExerciseSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from django.contrib import messages
 
 
 
 
-def home(request):
-    return HttpResponse("Activity Manager Home")
+
+def login(request):
+    if request.method =='POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+           data = form.cleaned_data
+           username = data['user_name']
+           try:
+               user = User.objects.get(user_name=username)
+           except:
+               messages.error(request,"No user found")
+           print("data found")
+           password = data['user_password']
+           if user.user_password == password:
+               messages.success(request, "Login Succesfull")
+               print("Login succesfull")
+               return redirect("/activitymanager/{}/home/".format(user.user_id))
+           else:
+               messages.error(request,"Login failed")
+    else:
+        form = LoginForm()
+    return render(request, 'activitymanager/login.html',{'form':form})
+                
+    
+    
+def home(request,user_id):
+    exercises = Exercise.objects.all()
+    user = User.objects.get(user_id=user_id)
+    context = {"exercises":exercises, "user":user}
+    return render(request, 'activitymanager/home.html', context)
     '''will make homepage with links to different pages'''
 
 def web_user_detail(request, user_id):
@@ -47,32 +76,44 @@ def web_edit_user(request,user_id):
         form = EditUserForm()
     return render(request,'activitymanager/edit_user.html',{'form':form})
 
-def web_exercise_detail(request, exercise_id):
-    exercise = get_object_or_404(Exercise,exercose_id=exercise_id)
-    return render(request, 'activitymanager/exercise_detail.html',{'exercise': exercise})
+def web_exercise_detail(request, exercise_id, user_id):
+    exercise = get_object_or_404(Exercise,exercise_id=exercise_id)
+    user = User.objects.get(user_id = user_id)
+    context = {'exercise': exercise, 'user': user}
+    return render(request, 'activitymanager/exercise_detail.html',context)
 
-def web_new_exercise(request):
+def web_new_exercise(request, user_id):
+    user = User.objects.get(user_id = user_id)
     if request.method =='POST':
         form = EditExerciseForm(request.POST)
         if form.is_valid():
             newexercise = form.save()
             exerciseID = newexercise.exercise_id
-        return redirect('/activitymanager/{}/exercise/'.format(exerciseID))
+        return redirect('/activitymanager/{}/{}/exercise/'.format(user_id,exerciseID))
     
     else:
         form = EditExerciseForm()
-    return render(request, 'activitymanager/create_exercise.html',{'form':form}) 
+        context = {'form':form, 'user':user}
+    return render(request, 'activitymanager/create_exercise.html',context) 
 
-def web_edit_exercise(request,exercise_id):
+def web_edit_exercise(request,exercise_id,user_id):
+    user = User.objects.get(user_id = user_id)
     exercise = Exercise.objects.get(exercise_id = exercise_id)
     if request.method =='POST':
         form = EditExerciseForm(request.POST, instance=exercise)
         if form.is_valid():
             form.save()
-            return redirect('/activitymanager/{}/exercise/'.format(exercise_id))
+            return redirect('/activitymanager/{}/{}/exercise/'.format(user_id,exercise_id))
     else:
         form = EditExerciseForm()
-    return render(request,'activitymanager/edit_exercise.html',{'form':form})
+        context = {'form':form, 'user':user}
+    return render(request,'activitymanager/edit_exercise.html',context)
+
+def web_all_user_exercises(request, user_id):
+    user = User.objects.get(user_id=user_id)
+    exercises = Exercise.objects.filter(user = user_id)
+    context = {"exercises":exercises, "user":user}
+    return render(request, 'activitymanager/your_exercises.html', context)
 
 @csrf_exempt
 def api_user_list(request):      

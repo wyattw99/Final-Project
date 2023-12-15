@@ -6,8 +6,14 @@
     <title>Create New Exercise</title>
 </head>
 <body>
+    <h1>Menu</h1>
+    <a href="{% url 'activitymanager:new_exercise' user_id=user.user_id %}"><button>New Exercise</button></a>
+    <a href="{% url 'activitymanager:all_exercises' user.user_id %}"><button>Your Exercises</button></a>
+    <a href="{% url  'activitymanager:user_detail' user.user_id%}"><button>Account Details</button></a>
+    <a href="{% url 'activitymanager:login' %}"><button>Logout</button></a>
+    <a href="{% url 'activitymanager:home' user_id=user.user_id %}"><button>Home</button></a>
     <form method="post">
-        <h1>New Exercise</h1>
+        <h1>Exercise Details</h1>
         {% csrf_token %}
         <label for="exercise_name">Exercise Name:</label>
         <input type="text" id="exercise_name" name="exercise_name" required><br>
@@ -27,7 +33,7 @@
         <label for="exercise_date">Exercise Date:</label>
         <input type="date" id="exercise_date" name="exercise_date" required><br>
 
-        <label for="exercise_time">Weight:</label>
+        <label for="exercise_time">Time:</label>
         <input type="number" id="exercise_time" name="exercise_time" required><br>
 
         <button type="submit">Create Exercise</button>

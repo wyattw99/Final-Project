@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+{% block content %}
+   <a href="{% url 'activitymanager:new_user' %}"><button>New User</button></a>
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+     <label for="user_name">User Name:</label>
+     <input type="text" id="user_name" name="user_name" required><br>
+     
+     <label for="user_password">Password:</label>
+     <input type="text" id="user_password" name="user_password" required><br>
+     
+    <button type="submit">Login</button>
+  </form>
+{% endblock %}

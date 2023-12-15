@@ -6,6 +6,8 @@
     <title>Create New User</title>
 </head>
 <body>
+<h1>Menu</h1>
+    <a href="{% url 'activitymanager:login' %}"><button>Login</button></a>
     <form method="post">
         <h1>New User</h1>
         {% csrf_token %}
