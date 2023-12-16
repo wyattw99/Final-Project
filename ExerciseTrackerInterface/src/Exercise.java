@@ -10,6 +10,7 @@ public class Exercise {
 	private int user_id;
 	private Date exercise_date;
 	private int exercise_time;
+	private String exercise_intensity;
 	
 	public int getExercise_id() {
 		return exercise_id;
@@ -60,8 +61,15 @@ public class Exercise {
 		this.exercise_time = exercise_time;
 	}
 	
+	public String getExercise_intensity() {
+		return exercise_intensity;
+	}
+	public void setExercise_intensity(String exercise_intensity) {
+		this.exercise_intensity = exercise_intensity;
+	}
+	
 	public Exercise(int exercise_id, String exercise_name, String exercise_type, int exercise_distance,
-			String exercise_description, int user_id, Date exercise_date, int exercise_time) {
+			String exercise_description, int user_id, Date exercise_date, int exercise_time, String exercise_intensity) {
 		this.exercise_id = exercise_id;
 		this.exercise_name = exercise_name;
 		this.exercise_type = exercise_type;
@@ -70,6 +78,7 @@ public class Exercise {
 		this.user_id = user_id;
 		this.exercise_date = exercise_date;
 		this.exercise_time = exercise_time;
+		this.exercise_intensity = exercise_intensity;
 	}
 	
 	public Exercise() {
@@ -81,6 +90,7 @@ public class Exercise {
 		this.exercise_date = null;
 		this.exercise_time = 0;
 	}
+
 	
 	
 	
