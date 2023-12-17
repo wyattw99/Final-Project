@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Exercise {
@@ -7,7 +8,7 @@ public class Exercise {
 	private String exercise_type;
 	private int exercise_distance;
 	private String exercise_description;
-	private int user_id;
+	private User user;
 	private Date exercise_date;
 	private int exercise_time;
 	private String exercise_intensity;
@@ -42,11 +43,11 @@ public class Exercise {
 	public void setExercise_description(String exercise_description) {
 		this.exercise_description = exercise_description;
 	}
-	public int getUser_id() {
-		return user_id;
+	public User getUser() {
+		return user;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUser_id(User user) {
+		this.user = user;
 	}
 	public Date getExercise_date() {
 		return exercise_date;
@@ -69,13 +70,13 @@ public class Exercise {
 	}
 	
 	public Exercise(int exercise_id, String exercise_name, String exercise_type, int exercise_distance,
-			String exercise_description, int user_id, Date exercise_date, int exercise_time, String exercise_intensity) {
+			String exercise_description, User user, Date exercise_date, int exercise_time, String exercise_intensity) {
 		this.exercise_id = exercise_id;
 		this.exercise_name = exercise_name;
 		this.exercise_type = exercise_type;
 		this.exercise_distance = exercise_distance;
 		this.exercise_description = exercise_description;
-		this.user_id = user_id;
+		this.user = user;
 		this.exercise_date = exercise_date;
 		this.exercise_time = exercise_time;
 		this.exercise_intensity = exercise_intensity;
@@ -86,13 +87,70 @@ public class Exercise {
 		this.exercise_type = "";
 		this.exercise_distance = 0;
 		this.exercise_description = "";
-		this.user_id = 0;
+		this.user = null;
 		this.exercise_date = null;
 		this.exercise_time = 0;
+		this.exercise_intensity = "";
 	}
-
 	
+	public double caloriesBurned() {
+	    double weight = user.getUser_weight();
+	    double time = (double) getExercise_time();
+	    if (exercise_type.equals("Run")) {
+	        if (exercise_intensity.equals("Easy")) {
+	            return 8 * (weight / 2.204) * (time / 60);
+	        } else if (exercise_intensity.equals("Medium")) {
+	            return 11.5 * (weight / 2.204) * (time / 60);
+	        } else if (this.exercise_intensity.equals("Hard")) {
+	            return 16.0 * (weight / 2.204) * (time / 60);
+	        } else {
+	            return 3.5 * (weight / 2.204) * (time / 60);
+	        }
+	    } else if (this.exercise_type.equals("Swim")) {
+	        if (this.exercise_intensity.equals("Easy")) {
+	            return  7 * (weight / 2.204) * (time / 60);
+	        } else if (this.exercise_intensity.equals("Medium")) {
+	            return 10 * (weight / 2.204) * (exercise_time / 60);
+	        } else if (this.exercise_intensity.equals("Hard")) {
+	            return 16 * (weight / 2.204) * (time / 60);
+	        } else {
+	            return 3.5 * (weight / 2.204) * (time / 60);
+	        }
+	    } else if (this.exercise_type.equals("Bike")) {
+	        if (this.exercise_intensity.equals("Easy")) {
+	            return 4 * (weight / 2.204) * (time / 60);
+	        } else if (this.exercise_intensity.equals("Medium")) {
+	            return 8 * (weight / 2.204) * (time / 60);
+	        } else if (this.exercise_intensity.equals("Hard")) {
+	            return 12 * (weight / 2.204) * (time / 60);
+	        } else {
+	            return 3.5 * (weight / 2.204) * (time / 60);
+	        }
+	    } else {
+	        if (this.exercise_intensity.equals("Easy")) {
+	            return 8 * (weight / 2.204) * (time / 60);
+	        } else if (this.exercise_intensity.equals("Medium")) {
+	            return 11.5 * (weight / 2.204) * (time / 60);
+	        } else if (this.exercise_intensity.equals("Hard")) {
+	            return 16.0 * (weight / 2.204) * (time / 60);
+	        } else {
+	            return 3.5 * (weight / 2.204) * (time / 60);
+	        }
+	    }
+	}
 	
+	@Override
+	public String toString() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		return String.format("Date: %s\t %s\tType: %s\t Distance: %d\n",df.format(exercise_date),exercise_name,exercise_type,exercise_distance);
+	}
 	
-	
+	public String detailString() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		return String.format("%s\n %s\n Distance: %d\n %s\n Completed by: %s on %s\nTime: %d minutes \n %s intensity which burned %.2f calories\n", 
+				exercise_name,exercise_type,exercise_distance,exercise_description,
+				(user.getFirst_name() +" " + user.getLast_name()),df.format(exercise_date),exercise_time,exercise_intensity,caloriesBurned());
+	}
 }
+
+

@@ -1,3 +1,4 @@
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User {
@@ -68,6 +69,13 @@ public class User {
 		this.user_birthday = user_birthday;
 		this.user_height = user_height;
 		this.user_weight = user_weight;
+	}
+	
+	
+	@Override
+	public String toString() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		return String.format("Username: %s\n password: %s\n First Name: %s\n Last Name: %s\n Birthday: %s\n Height: %d inches \n Weight: %d lbs\n", user_name,user_password,first_name,last_name,df.format(user_birthday),user_height,user_weight);
 	}
 	
 	
